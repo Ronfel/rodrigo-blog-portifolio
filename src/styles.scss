@@ -208,6 +208,36 @@ textarea {
   color: var(--green);
 }
 
+.social-links {
+  display: flex;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.social-link {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--white);
+  color: var(--green);
+  transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+.social-link:hover {
+  transform: translateY(-2px);
+  background: var(--green);
+  color: var(--white);
+}
+
+.social-link svg {
+  width: 19px;
+  height: 19px;
+  fill: currentColor;
+}
+
 .hero-art {
   position: relative;
   min-height: 310px;
