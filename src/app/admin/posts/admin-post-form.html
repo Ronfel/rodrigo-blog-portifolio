@@ -1,0 +1,46 @@
+<section class="admin-form-card">
+  <span class="eyebrow">Coleção posts</span>
+  <h2>Cadastrar post</h2>
+  <p class="admin-description">A coleção será criada automaticamente quando o primeiro post for salvo.</p>
+
+  <form class="admin-form" (ngSubmit)="savePost()">
+    <div class="form-field">
+      <label for="post-category">Categoria</label>
+      <input id="post-category" name="category" type="text" [(ngModel)]="category" maxlength="40" required />
+    </div>
+    <div class="form-field">
+      <label for="post-title">Título</label>
+      <input id="post-title" name="title" type="text" [(ngModel)]="title" maxlength="120" required />
+    </div>
+    <div class="form-field">
+      <label for="post-description">Resumo</label>
+      <textarea id="post-description" name="description" [(ngModel)]="description" maxlength="500" required></textarea>
+    </div>
+    <div class="form-field">
+      <label for="post-date">Data de publicação</label>
+      <input id="post-date" name="date" type="date" [(ngModel)]="date" required />
+    </div>
+    <div class="form-field">
+      <label for="post-reading-time">Tempo de leitura</label>
+      <input id="post-reading-time" name="readingTime" type="text" [(ngModel)]="readingTime" maxlength="30" required />
+    </div>
+    <div class="form-field">
+      <label for="post-order">Ordem na página</label>
+      <input id="post-order" name="order" type="number" [(ngModel)]="order" min="0" max="100000" step="1" required />
+    </div>
+    <label class="admin-checkbox">
+      <input name="published" type="checkbox" [(ngModel)]="published" />
+      Publicar imediatamente
+    </label>
+
+    @if (message) {
+      <p class="admin-message admin-success" role="status">{{ message }}</p>
+    }
+    @if (errorMessage) {
+      <p class="admin-message admin-error" role="alert">{{ errorMessage }}</p>
+    }
+    <button class="button" type="submit" [disabled]="saving">
+      {{ saving ? 'Salvando...' : 'Cadastrar post' }}
+    </button>
+  </form>
+</section>

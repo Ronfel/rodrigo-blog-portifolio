@@ -1,0 +1,42 @@
+<section class="admin-form-card">
+  <span class="eyebrow">Coleção projects</span>
+  <h2>Cadastrar projeto</h2>
+  <p class="admin-description">A coleção será criada automaticamente quando o primeiro projeto for salvo.</p>
+
+  <form class="admin-form" (ngSubmit)="saveProject()">
+    <div class="form-field">
+      <label for="project-number">Número ou identificador curto</label>
+      <input id="project-number" name="number" type="text" [(ngModel)]="number" maxlength="10" required />
+    </div>
+    <div class="form-field">
+      <label for="project-name">Nome do projeto</label>
+      <input id="project-name" name="name" type="text" [(ngModel)]="name" maxlength="100" required />
+    </div>
+    <div class="form-field">
+      <label for="project-description">Descrição</label>
+      <textarea id="project-description" name="description" [(ngModel)]="description" maxlength="1000" required></textarea>
+    </div>
+    <div class="form-field">
+      <label for="project-technologies">Tecnologias (separadas por vírgula)</label>
+      <input id="project-technologies" name="technologies" type="text" [(ngModel)]="technologiesText" placeholder="Python, Django, MySQL" required />
+    </div>
+    <div class="form-field">
+      <label for="project-order">Ordem na página</label>
+      <input id="project-order" name="order" type="number" [(ngModel)]="order" min="0" max="100000" step="1" required />
+    </div>
+    <label class="admin-checkbox">
+      <input name="published" type="checkbox" [(ngModel)]="published" />
+      Publicar imediatamente
+    </label>
+
+    @if (message) {
+      <p class="admin-message admin-success" role="status">{{ message }}</p>
+    }
+    @if (errorMessage) {
+      <p class="admin-message admin-error" role="alert">{{ errorMessage }}</p>
+    }
+    <button class="button" type="submit" [disabled]="saving">
+      {{ saving ? 'Salvando...' : 'Cadastrar projeto' }}
+    </button>
+  </form>
+</section>

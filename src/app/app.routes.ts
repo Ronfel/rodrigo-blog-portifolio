@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { adminRoutes } from './admin.routes.local';
 
 export const routes: Routes = [
   {
@@ -21,5 +22,6 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/contact/contact').then((module) => module.Contact),
     title: 'Contato | Rodrigo',
   },
+  ...adminRoutes,
   { path: '**', redirectTo: '' },
 ];

@@ -561,6 +561,119 @@ textarea {
   line-height: 1.6;
 }
 
+.admin-page {
+  width: min(100%, 760px);
+  min-height: 70vh;
+  margin: 0 auto;
+  padding: 48px 0 76px;
+}
+
+.login-page {
+  display: grid;
+  max-width: 500px;
+  align-content: center;
+}
+
+.admin-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.admin-header h1,
+.admin-form-card h1,
+.admin-form-card h2 {
+  margin: 12px 0 0;
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(25px, 4vw, 34px);
+  font-weight: 600;
+  letter-spacing: -1.3px;
+}
+
+.admin-form-card h2 {
+  margin-top: 12px;
+  font-size: 25px;
+}
+
+.admin-nav {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.admin-nav a {
+  padding: 9px 12px;
+  border-radius: 7px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.admin-nav a.active,
+.admin-nav a:hover {
+  background: var(--mint);
+  color: var(--green-dark);
+}
+
+.admin-form-card {
+  padding: 26px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--white);
+}
+
+.admin-description {
+  margin: 10px 0 22px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.admin-form {
+  display: grid;
+  gap: 17px;
+}
+
+.admin-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.admin-checkbox input {
+  accent-color: var(--green);
+}
+
+.admin-message {
+  margin: 0;
+  padding: 11px 13px;
+  border-radius: 7px;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.admin-success {
+  background: #e8f4eb;
+  color: #235d39;
+}
+
+.admin-error {
+  background: #fbefed;
+  color: #943f35;
+}
+
+.admin-form .button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
 .site-footer {
   display: flex;
   min-height: 82px;
@@ -629,6 +742,14 @@ textarea {
   .contact-layout {
     grid-template-columns: 1fr;
     gap: 24px;
+  }
+
+  .admin-page {
+    padding: 35px 0 55px;
+  }
+
+  .admin-form-card {
+    padding: 20px;
   }
 
   .blog-list {

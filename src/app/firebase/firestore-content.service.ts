@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import type { DocumentData, Firestore, Unsubscribe } from 'firebase/firestore';
 import { Observable } from 'rxjs';
-import { firebaseConfig } from './firebase.config';
+import { getFirebaseApp } from './firebase-app';
 
 export interface Project {
   id: string;
@@ -121,9 +121,8 @@ export class FirestoreContentService {
   private getFirestore(): Promise<Firestore> {
     if (!this.firestorePromise) {
       this.firestorePromise = Promise.resolve().then(async () => {
-        const { getApps, initializeApp } = await import('firebase/app');
-        const app = getApps().find((firebaseApp) => firebaseApp.name === '[DEFAULT]')
-          ?? initializeApp(firebaseConfig);
+        const { getFirebaseApp } = await import('./firebase-app');
+        const app = getFirebaseApp();
         const { getFirestore } = await import('firebase/firestore');
         return getFirestore(app);
       });

@@ -1,0 +1,27 @@
+<main class="admin-page login-page">
+  <section class="admin-form-card">
+    <span class="eyebrow">Acesso restrito</span>
+    <h1>Entrar na administração</h1>
+    <p class="admin-description">
+      Este formulário só existe no ambiente de desenvolvimento. O acesso aos
+      dados também é validado pelas regras do Firestore.
+    </p>
+
+    <form class="admin-form" (ngSubmit)="login()">
+      <div class="form-field">
+        <label for="admin-email">E-mail</label>
+        <input id="admin-email" name="email" type="email" [(ngModel)]="email" required autocomplete="username" />
+      </div>
+      <div class="form-field">
+        <label for="admin-password">Senha</label>
+        <input id="admin-password" name="password" type="password" [(ngModel)]="password" required autocomplete="current-password" />
+      </div>
+      @if (errorMessage) {
+        <p class="admin-message admin-error" role="alert">{{ errorMessage }}</p>
+      }
+      <button class="button" type="submit" [disabled]="submitting">
+        {{ submitting ? 'Entrando...' : 'Entrar' }}
+      </button>
+    </form>
+  </section>
+</main>
