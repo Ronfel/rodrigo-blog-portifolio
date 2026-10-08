@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { FirebaseError } from 'firebase/app';
 import { AdminAuthService, ADMIN_EMAIL } from '../admin-auth.service';
@@ -12,27 +12,31 @@ export class AdminLogin {
   private readonly router = inject(Router);
 
   protected readonly adminEmail = ADMIN_EMAIL;
-  protected errorMessage = '';
-  protected submitting = false;
+  protected readonly errorMessage = signal('');
+  protected readonly submitting = signal(false);
 
   protected async login(): Promise<void> {
-    this.submitting = true;
-    this.errorMessage = '';
+    if (this.submitting()) {
+      return;
+    }
+
+    this.submitting.set(true);
+    this.errorMessage.set('');
 
     try {
       const user = await this.auth.signInWithGoogle();
       if (!this.auth.isAdmin(user)) {
         await this.auth.signOut();
-        this.errorMessage = `Acesse com a conta Google ${this.adminEmail}.`;
+        this.errorMessage.set(`Acesse com a conta Google ${this.adminEmail}.`);
         return;
       }
 
       await this.router.navigateByUrl('/admin/projetos');
     } catch (error) {
       console.error('Admin Google sign-in failed.', error);
-      this.errorMessage = this.getAuthErrorMessage(error);
+      this.errorMessage.set(this.getAuthErrorMessage(error));
     } finally {
-      this.submitting = false;
+      this.submitting.set(false);
     }
   }
 
@@ -43,7 +47,7 @@ export class AdminLogin {
 
     switch (error.code) {
       case 'auth/unauthorized-domain':
-        return 'Este domínio não está autorizado no Firebase. Em Authentication → Settings → Authorized domains, adicione localhost (sem protocolo ou porta).';
+        return `O domínio "${window.location.hostname}" não está autorizado no Firebase. Em Authentication → Settings → Authorized domains, adicione esse domínio sem protocolo ou porta.`;
       case 'auth/operation-not-allowed':
         return 'O provedor Google está desativado. Habilite-o em Firebase Console → Authentication → Sign-in method.';
       case 'auth/popup-blocked':
@@ -62,7 +66,7 @@ export class AdminLogin {
       case 'auth/network-request-failed':
         return 'Não foi possível conectar ao Firebase Authentication. Confira sua conexão, VPN ou bloqueadores de rede.';
       case 'auth/sign-in-timeout':
-        return 'O Firebase não concluiu o login após 15 segundos. O app recebeu API_KEY_INVALID; corrija ou substitua a chave de API do projeto app-explorar em Google Cloud Console → APIs e serviços → Credenciais.';
+        return 'O login do Google não foi concluído após 15 segundos. Confira se o domínio atual está autorizado no Firebase, se o navegador permite pop-ups e se a conexão está funcionando.';
       default:
         return `Não foi possível entrar com Google (Firebase: ${error.code}).`;
     }

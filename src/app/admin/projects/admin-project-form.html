@@ -29,14 +29,14 @@
       Publicar imediatamente
     </label>
 
-    @if (message) {
-      <p class="admin-message admin-success" role="status">{{ message }}</p>
+    @if (message()) {
+      <p class="admin-message admin-success" role="status">{{ message() }}</p>
     }
-    @if (errorMessage) {
-      <p class="admin-message admin-error" role="alert">{{ errorMessage }}</p>
+    @if (errorMessage()) {
+      <p class="admin-message admin-error" role="alert">{{ errorMessage() }}</p>
     }
-    <button class="button" type="submit" [disabled]="saving || writeTimedOut">
-      {{ saving ? 'Salvando...' : writeTimedOut ? 'Verifique o Firestore' : 'Cadastrar projeto' }}
+    <button class="button" type="submit" [disabled]="saving() || writeTimedOut()">
+      {{ saving() ? 'Salvando...' : writeTimedOut() ? 'Verifique o Firestore' : 'Cadastrar projeto' }}
     </button>
   </form>
 </section>

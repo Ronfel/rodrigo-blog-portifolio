@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FirestoreAdminService, FirestoreWriteTimeoutError, getFirestoreWriteErrorMessage } from '../firestore-admin.service';
 
@@ -16,19 +16,19 @@ export class AdminProjectForm {
   protected technologiesText = '';
   protected order = 1;
   protected published = true;
-  protected saving = false;
-  protected writeTimedOut = false;
-  protected message = '';
-  protected errorMessage = '';
+  protected readonly saving = signal(false);
+  protected readonly writeTimedOut = signal(false);
+  protected readonly message = signal('');
+  protected readonly errorMessage = signal('');
 
   protected async saveProject(): Promise<void> {
-    if (this.saving || this.writeTimedOut) {
+    if (this.saving() || this.writeTimedOut()) {
       return;
     }
 
-    this.saving = true;
-    this.message = '';
-    this.errorMessage = '';
+    this.saving.set(true);
+    this.message.set('');
+    this.errorMessage.set('');
 
     try {
       const technologies = this.technologiesText
@@ -45,7 +45,7 @@ export class AdminProjectForm {
         published: this.published,
       });
 
-      this.message = 'Projeto cadastrado com sucesso.';
+      this.message.set('Projeto cadastrado com sucesso.');
       this.number = '';
       this.name = '';
       this.description = '';
@@ -53,10 +53,10 @@ export class AdminProjectForm {
       this.order += 1;
     } catch (error) {
       console.error('Project creation failed.', error);
-      this.writeTimedOut = error instanceof FirestoreWriteTimeoutError;
-      this.errorMessage = getFirestoreWriteErrorMessage(error, 'projeto');
+      this.writeTimedOut.set(error instanceof FirestoreWriteTimeoutError);
+      this.errorMessage.set(getFirestoreWriteErrorMessage(error, 'projeto'));
     } finally {
-      this.saving = false;
+      this.saving.set(false);
     }
   }
 }

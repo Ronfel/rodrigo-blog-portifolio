@@ -7,6 +7,6 @@ export const firebaseConfig: FirebaseOptions = {
   projectId: "app-explorar",
   storageBucket: "app-explorar.firebasestorage.app",
   messagingSenderId: "1018154961225",
-  appId: "1:1018154961225:web:05bc779bfcf7506a543298",
-  measurementId: "G-PPHTEE985B"
+  appId: "1:1018154961225:web:fa9aa7bb7ac8ae0f543298",
+  measurementId: "G-G9QMPC3YPX"
 };
