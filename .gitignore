@@ -29,6 +29,12 @@ yarn-error.log
 .settings/
 *.sublime-workspace
 
+# Keep local Xcode helper implementation out of this Angular repository
+/.agents/skills/xcode-project-setup/scripts/xcode_spm_setup/Package.swift
+/.agents/skills/xcode-project-setup/scripts/xcode_spm_setup/Sources/*.swift
+/.aider-desk/skills/xcode-project-setup/scripts/xcode_spm_setup/Package.swift
+/.aider-desk/skills/xcode-project-setup/scripts/xcode_spm_setup/Sources/*.swift
+
 # Visual Studio Code
 .vscode/*
 !.vscode/settings.json
