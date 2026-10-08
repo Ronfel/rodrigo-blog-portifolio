@@ -3,42 +3,15 @@
     <span class="eyebrow">Acesso restrito</span>
     <h1>Entrar na administração</h1>
     <p class="admin-description">
-      Este formulário só existe no ambiente de desenvolvimento. O acesso aos
+      Entre com sua conta Google <strong>{{ adminEmail }}</strong>. O acesso aos
       dados também é validado pelas regras do Firestore.
     </p>
 
-    @if (!verificationUser) {
-      <form class="admin-form" (ngSubmit)="login()">
-      <div class="form-field">
-        <label for="admin-email">E-mail</label>
-        <input id="admin-email" name="email" type="email" [(ngModel)]="email" required autocomplete="username" />
-      </div>
-      <div class="form-field">
-        <label for="admin-password">Senha</label>
-        <input id="admin-password" name="password" type="password" [(ngModel)]="password" required autocomplete="current-password" />
-      </div>
-      @if (errorMessage) {
-        <p class="admin-message admin-error" role="alert">{{ errorMessage }}</p>
-      }
-      <button class="button" type="submit" [disabled]="submitting">
-        {{ submitting ? 'Entrando...' : 'Entrar' }}
-      </button>
-      </form>
-    } @else {
-      <div class="admin-form">
-        @if (statusMessage) {
-          <p class="admin-message admin-success" role="status">{{ statusMessage }}</p>
-        }
-        @if (errorMessage) {
-          <p class="admin-message admin-error" role="alert">{{ errorMessage }}</p>
-        }
-        <button class="button" type="button" [disabled]="submitting" (click)="confirmEmailVerified()">
-          Já confirmei meu e-mail
-        </button>
-        <button class="button button-secondary" type="button" [disabled]="submitting" (click)="resendVerificationEmail()">
-          Reenviar link de confirmação
-        </button>
-      </div>
+    @if (errorMessage) {
+      <p class="admin-message admin-error" role="alert">{{ errorMessage }}</p>
     }
+    <button class="button" type="button" [disabled]="submitting" (click)="login()">
+      {{ submitting ? 'Abrindo Google...' : 'Entrar com Google ↗' }}
+    </button>
   </section>
 </main>

@@ -1,18 +1,19 @@
 import { Injectable } from '@angular/core';
 import {
   Auth,
+  GoogleAuthProvider,
   onAuthStateChanged,
-  reload,
-  sendEmailVerification,
-  signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
   User,
+  UserCredential,
 } from 'firebase/auth';
+import { FirebaseError } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { firstValueFrom, Observable, take } from 'rxjs';
 import { getFirebaseApp } from '../firebase/firebase-app';
 
-export const ADMIN_EMAIL = 'rodrigonflara@gmail.com';
+export const ADMIN_EMAIL = 'ronfelara@gmail.com';
 
 @Injectable({ providedIn: 'root' })
 export class AdminAuthService {
@@ -32,18 +33,24 @@ export class AdminAuthService {
     return firstValueFrom(this.observeUser().pipe(take(1)));
   }
 
-  async signIn(email: string, password: string): Promise<User> {
-    const credential = await signInWithEmailAndPassword(this.auth, email.trim(), password);
+  async signInWithGoogle(): Promise<User> {
+    const provider = new GoogleAuthProvider();
+    provider.setCustomParameters({ prompt: 'select_account' });
+    const credential = await new Promise<UserCredential>((resolve, reject) => {
+      const timeoutId = window.setTimeout(() => {
+        reject(
+          new FirebaseError(
+            'auth/sign-in-timeout',
+            'Google sign-in did not complete within the allowed time.',
+          ),
+        );
+      }, 15000);
+
+      void signInWithPopup(this.auth, provider).then(resolve, reject).finally(() => {
+        window.clearTimeout(timeoutId);
+      });
+    });
     return credential.user;
-  }
-
-  async sendVerificationEmail(user: User): Promise<void> {
-    await sendEmailVerification(user);
-  }
-
-  async refreshUser(user: User): Promise<User> {
-    await reload(user);
-    return user;
   }
 
   async signOut(): Promise<void> {

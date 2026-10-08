@@ -36,12 +36,6 @@
           },
           "configurations": {
             "production": {
-              "fileReplacements": [
-                {
-                  "replace": "src/app/admin.routes.local.ts",
-                  "with": "src/app/admin.routes.production.ts"
-                }
-              ],
               "budgets": [
                 {
                   "type": "initial",

@@ -25,23 +25,22 @@ dados.
    console ou pelo Firebase CLI (`firebase deploy --project app-explorar --only firestore:rules`).
    Visitantes podem ler somente documentos com `published: true`; a conta
    administrativa autenticada pode ler rascunhos e criar documentos.
-3. Para cadastrar conteúdo localmente, ative **Authentication → Sign-in method
-   → Email/Password** e crie no Firebase Authentication o usuário
-   `rodrigonflara@gmail.com`. A criação manual da conta no Console não envia
-   automaticamente um e-mail de confirmação. Na primeira tentativa de login, o
-   formulário do projeto envia o link de verificação e oferece opções para
-   reenviá-lo ou conferir se a confirmação já foi feita. As regras permitem
-   leituras administrativas e criação de documentos somente para esse usuário
-   autenticado e verificado.
-4. Execute `npm start` e acesse `/admin/login`. As páginas locais estão
+3. Para cadastrar conteúdo, habilite **Authentication → Sign-in
+   method → Google** e adicione `localhost` em **Authentication → Settings →
+   Authorized domains** (sem protocolo ou porta). Antes do deploy, adicione
+   também `rodrigonflara.web.app` aos domínios autorizados. Entre com a conta
+   Google `ronfelara@gmail.com`; as regras permitem leituras administrativas e
+   criação de documentos somente para esse usuário autenticado e verificado.
+   Se esse e-mail já existir em Authentication com apenas o provedor
+   Email/Password, vincule o provedor Google à conta ou remova a conta antiga
+   antes de entrar com Google.
+4. Execute `npm start` ou abra o site publicado e acesse `/admin/login`. As páginas administrativas estão
    disponíveis em `/admin/projetos` e `/admin/posts`; os formulários criam os
    documentos e as coleções automaticamente. A gravação é no Firestore remoto
    do projeto `app-explorar`.
-5. O build de produção substitui a lista de rotas administrativas por uma lista
-   vazia (`src/app/admin.routes.production.ts`). Assim, os formulários e a rota
-   de login não são incluídos no app servido em produção. A autenticação e as
-   regras do Firestore continuam necessárias, pois esconder rotas não protege o
-   banco.
+5. As rotas administrativas também existem em produção. O login Google no
+   cliente e as regras do Firestore restringem o acesso a
+   `ronfelara@gmail.com`; não use apenas a rota oculta como proteção.
 
 ### Coleção `projects`
 
