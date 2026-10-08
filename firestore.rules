@@ -34,6 +34,42 @@ service cloud.firestore {
         && request.auth.token.email_verified == true;
     }
 
+    // Technology names are open-ended; only their shape and size are validated.
+    function isValidTechnology(data, index) {
+      return data.technologies.size() <= index
+        || (
+          data.technologies[index] is string
+          && data.technologies[index].size() > 0
+          && data.technologies[index].size() <= 100
+        );
+    }
+
+    function isValidTechnologies(data) {
+      return data.technologies is list
+        && data.technologies.size() > 0
+        && data.technologies.size() <= 20
+        && isValidTechnology(data, 0)
+        && isValidTechnology(data, 1)
+        && isValidTechnology(data, 2)
+        && isValidTechnology(data, 3)
+        && isValidTechnology(data, 4)
+        && isValidTechnology(data, 5)
+        && isValidTechnology(data, 6)
+        && isValidTechnology(data, 7)
+        && isValidTechnology(data, 8)
+        && isValidTechnology(data, 9)
+        && isValidTechnology(data, 10)
+        && isValidTechnology(data, 11)
+        && isValidTechnology(data, 12)
+        && isValidTechnology(data, 13)
+        && isValidTechnology(data, 14)
+        && isValidTechnology(data, 15)
+        && isValidTechnology(data, 16)
+        && isValidTechnology(data, 17)
+        && isValidTechnology(data, 18)
+        && isValidTechnology(data, 19);
+    }
+
     function isValidProject(data) {
       return data.keys().hasAll([
           'published', 'order', 'number', 'name', 'description', 'technologies'
@@ -54,18 +90,7 @@ service cloud.firestore {
         && data.description is string
         && data.description.size() > 0
         && data.description.size() <= 1000
-        && data.technologies is list
-        && data.technologies.size() > 0
-        && data.technologies.size() <= 20
-        && data.technologies.hasOnly([
-          'Python', 'Delphi', 'Django', 'PySide6', 'Selenium WebDriver',
-          'SQL Server', 'MSSQL Server', 'MySQL', 'Oracle', 'Git', 'Bitbucket',
-          'Sourcetree', 'Scrum', 'Jira', 'C#', 'Android', 'TDD', 'POO',
-          'Design Patterns GoF', 'Regexp', 'HTML', 'CSS', 'TypeScript',
-          'Angular', 'JavaScript', 'Java', 'React', 'Node.js', 'Firebase',
-          'Firestore', 'Firebase Authentication', 'Acessibilidade',
-          'Tailwind CSS', 'Tecnologia 1', 'Tecnologia 2'
-        ]);
+        && isValidTechnologies(data);
     }
 
     function isValidPost(data) {
