@@ -1,0 +1,23 @@
+<section class="page-heading">
+  <span class="eyebrow">Notas de percurso</span>
+  <h1>Blog<span style="color: var(--green)">.</span></h1>
+  <p class="page-intro">
+    Ideias, tutoriais e aprendizados sobre desenvolvimento web — escritos
+    para compartilhar o que descubro pelo caminho.
+  </p>
+</section>
+
+<section class="blog-list" aria-label="Lista de posts">
+  @for (post of posts; track post.title) {
+    <article class="post-card">
+      <span class="post-meta">{{ post.category }}</span>
+      <h2>{{ post.title }}</h2>
+      <p>{{ post.description }}</p>
+      <div class="post-footer">
+        <span>{{ post.date }}</span>
+        <span>{{ post.readingTime }}</span>
+      </div>
+    </article>
+  }
+</section>
+<p class="sample-note">Posts demonstrativos: substitua pelos seus artigos e datas de publicação.</p>

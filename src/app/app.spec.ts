@@ -1,10 +1,13 @@
 import { TestBed } from '@angular/core/testing';
+import { provideRouter, Router } from '@angular/router';
 import { App } from './app';
+import { routes } from './app.routes';
 
 describe('App', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [App],
+      providers: [provideRouter(routes)],
     })
       .compileComponents();
   });
@@ -15,10 +18,14 @@ describe('App', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should render title', async () => {
+  it('should render the portfolio home page and primary navigation', async () => {
     const fixture = TestBed.createComponent(App);
+    await TestBed.inject(Router).navigateByUrl('/');
+    fixture.detectChanges();
     await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, rodrigo-blog-portifolio');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Olá, sou Rodrigo.');
+    expect(compiled.querySelector('nav')?.textContent).toContain('Sobre mim');
+    expect(compiled.querySelector('nav')?.textContent).toContain('Contato');
   });
 });
