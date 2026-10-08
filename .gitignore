@@ -11,6 +11,15 @@
 npm-debug.log
 yarn-error.log
 
+# Firebase local cache and emulator output
+/.firebase/
+/firebase-debug.log
+/firestore-debug.log
+/ui-debug.log
+/dataconnect-debug.log
+/firebase-export*/
+/.runtimeconfig.json
+
 # IDEs and editors
 .idea/
 .project

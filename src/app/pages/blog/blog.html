@@ -8,16 +8,23 @@
 </section>
 
 <section class="blog-list" aria-label="Lista de posts">
-  @for (post of posts; track post.title) {
-    <article class="post-card">
-      <span class="post-meta">{{ post.category }}</span>
-      <h2>{{ post.title }}</h2>
-      <p>{{ post.description }}</p>
-      <div class="post-footer">
-        <span>{{ post.date }}</span>
-        <span>{{ post.readingTime }}</span>
-      </div>
-    </article>
+  @if (postsState().loading) {
+    <p class="content-message">Carregando posts...</p>
+  } @else if (postsState().error) {
+    <p class="content-message content-error" role="alert">{{ postsState().error }}</p>
+  } @else if (postsState().items.length === 0) {
+    <p class="content-message">Os posts serão publicados em breve.</p>
+  } @else {
+    @for (post of postsState().items; track post.id) {
+      <article class="post-card">
+        <span class="post-meta">{{ post.category }}</span>
+        <h2>{{ post.title }}</h2>
+        <p>{{ post.description }}</p>
+        <div class="post-footer">
+          <span>{{ post.date }}</span>
+          <span>{{ post.readingTime }}</span>
+        </div>
+      </article>
+    }
   }
 </section>
-<p class="sample-note">Posts demonstrativos: substitua pelos seus artigos e datas de publicação.</p>

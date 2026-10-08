@@ -62,20 +62,27 @@
   </div>
 
   <div class="project-grid">
-    @for (project of projects; track project.number) {
-      <article class="project-card">
-        <span class="project-number">{{ project.number }} / EXEMPLO</span>
-        <h3>{{ project.name }}</h3>
-        <p>{{ project.description }}</p>
-        <div class="tag-list">
-          @for (technology of project.technologies; track technology) {
-            <span class="tag">{{ technology }}</span>
-          }
-        </div>
-      </article>
+    @if (projectsState().loading) {
+      <p class="content-message">Carregando projetos...</p>
+    } @else if (projectsState().error) {
+      <p class="content-message content-error" role="alert">{{ projectsState().error }}</p>
+    } @else if (projectsState().items.length === 0) {
+      <p class="content-message">Os projetos serão publicados em breve.</p>
+    } @else {
+      @for (project of projectsState().items; track project.id) {
+        <article class="project-card">
+          <span class="project-number">{{ project.number }}</span>
+          <h3>{{ project.name }}</h3>
+          <p>{{ project.description }}</p>
+          <div class="tag-list">
+            @for (technology of project.technologies; track technology) {
+              <span class="tag">{{ technology }}</span>
+            }
+          </div>
+        </article>
+      }
     }
   </div>
-  <p class="sample-note">Os projetos e tecnologias são exemplos iniciais: troque-os pelos seus trabalhos reais.</p>
 </section>
 
 <section class="section-block">

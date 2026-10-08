@@ -1,13 +1,24 @@
 import { TestBed } from '@angular/core/testing';
 import { provideRouter, Router } from '@angular/router';
+import { of } from 'rxjs';
 import { App } from './app';
 import { routes } from './app.routes';
+import { FirestoreContentService } from './firebase/firestore-content.service';
 
 describe('App', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [App],
-      providers: [provideRouter(routes)],
+      providers: [
+        provideRouter(routes),
+        {
+          provide: FirestoreContentService,
+          useValue: {
+            watchProjects: () => of({ items: [], loading: false, error: null }),
+            watchPosts: () => of({ items: [], loading: false, error: null }),
+          },
+        },
+      ],
     })
       .compileComponents();
   });

@@ -1,38 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { BlogPost, ContentState, FirestoreContentService } from '../../firebase/firestore-content.service';
+
+const INITIAL_POSTS_STATE: ContentState<BlogPost> = {
+  items: [],
+  loading: true,
+  error: null,
+};
 
 @Component({
   selector: 'app-blog',
   templateUrl: './blog.html',
 })
 export class Blog {
-  protected readonly posts = [
-    {
-      category: 'DESENVOLVIMENTO',
-      title: 'Como começo um projeto web do zero',
-      description: 'Um roteiro prático para organizar ideias, definir prioridades e dar os primeiros passos com confiança.',
-      date: 'Em breve',
-      readingTime: '5 min de leitura',
-    },
-    {
-      category: 'APRENDIZADO',
-      title: 'Pequenos hábitos para escrever código melhor',
-      description: 'Reflexões sobre consistência, legibilidade e como aprender um pouco a cada entrega.',
-      date: 'Em breve',
-      readingTime: '4 min de leitura',
-    },
-    {
-      category: 'FRONT-END',
-      title: 'Detalhes de interface que fazem diferença',
-      description: 'Acessibilidade, estados e feedback: alguns cuidados que deixam produtos mais claros para todos.',
-      date: 'Em breve',
-      readingTime: '6 min de leitura',
-    },
-    {
-      category: 'FERRAMENTAS',
-      title: 'Meu fluxo de trabalho para aprender tecnologias',
-      description: 'Como sair da documentação e chegar a uma pequena aplicação que transforma teoria em prática.',
-      date: 'Em breve',
-      readingTime: '3 min de leitura',
-    },
-  ];
+  private readonly content = inject(FirestoreContentService);
+  protected readonly postsState = toSignal(this.content.watchPosts(), {
+    initialValue: INITIAL_POSTS_STATE,
+  });
 }

@@ -1,13 +1,25 @@
 import { Routes } from '@angular/router';
-import { About } from './pages/about/about';
-import { Blog } from './pages/blog/blog';
-import { Contact } from './pages/contact/contact';
-import { Home } from './pages/home/home';
 
 export const routes: Routes = [
-  { path: '', component: Home, title: 'Início | Rodrigo' },
-  { path: 'sobre', component: About, title: 'Sobre mim | Rodrigo' },
-  { path: 'blog', component: Blog, title: 'Blog | Rodrigo' },
-  { path: 'contato', component: Contact, title: 'Contato | Rodrigo' },
+  {
+    path: '',
+    loadComponent: () => import('./pages/home/home').then((module) => module.Home),
+    title: 'Início | Rodrigo',
+  },
+  {
+    path: 'sobre',
+    loadComponent: () => import('./pages/about/about').then((module) => module.About),
+    title: 'Sobre mim | Rodrigo',
+  },
+  {
+    path: 'blog',
+    loadComponent: () => import('./pages/blog/blog').then((module) => module.Blog),
+    title: 'Blog | Rodrigo',
+  },
+  {
+    path: 'contato',
+    loadComponent: () => import('./pages/contact/contact').then((module) => module.Contact),
+    title: 'Contato | Rodrigo',
+  },
   { path: '**', redirectTo: '' },
 ];
