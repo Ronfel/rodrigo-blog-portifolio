@@ -27,9 +27,12 @@ dados.
    administrativa autenticada pode ler rascunhos e criar documentos.
 3. Para cadastrar conteúdo localmente, ative **Authentication → Sign-in method
    → Email/Password** e crie no Firebase Authentication o usuário
-   `ronfelara@gmail.com`. Verifique o endereço de e-mail dessa conta. As regras
-   permitem leituras administrativas e criação de documentos somente para esse
-   usuário autenticado e verificado.
+   `rodrigonflara@gmail.com`. A criação manual da conta no Console não envia
+   automaticamente um e-mail de confirmação. Na primeira tentativa de login, o
+   formulário do projeto envia o link de verificação e oferece opções para
+   reenviá-lo ou conferir se a confirmação já foi feita. As regras permitem
+   leituras administrativas e criação de documentos somente para esse usuário
+   autenticado e verificado.
 4. Execute `npm start` e acesse `/admin/login`. As páginas locais estão
    disponíveis em `/admin/projetos` e `/admin/posts`; os formulários criam os
    documentos e as coleções automaticamente. A gravação é no Firestore remoto

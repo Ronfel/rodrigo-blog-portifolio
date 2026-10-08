@@ -7,7 +7,8 @@
       dados também é validado pelas regras do Firestore.
     </p>
 
-    <form class="admin-form" (ngSubmit)="login()">
+    @if (!verificationUser) {
+      <form class="admin-form" (ngSubmit)="login()">
       <div class="form-field">
         <label for="admin-email">E-mail</label>
         <input id="admin-email" name="email" type="email" [(ngModel)]="email" required autocomplete="username" />
@@ -22,6 +23,22 @@
       <button class="button" type="submit" [disabled]="submitting">
         {{ submitting ? 'Entrando...' : 'Entrar' }}
       </button>
-    </form>
+      </form>
+    } @else {
+      <div class="admin-form">
+        @if (statusMessage) {
+          <p class="admin-message admin-success" role="status">{{ statusMessage }}</p>
+        }
+        @if (errorMessage) {
+          <p class="admin-message admin-error" role="alert">{{ errorMessage }}</p>
+        }
+        <button class="button" type="button" [disabled]="submitting" (click)="confirmEmailVerified()">
+          Já confirmei meu e-mail
+        </button>
+        <button class="button button-secondary" type="button" [disabled]="submitting" (click)="resendVerificationEmail()">
+          Reenviar link de confirmação
+        </button>
+      </div>
+    }
   </section>
 </main>

@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import {
   Auth,
   onAuthStateChanged,
+  reload,
+  sendEmailVerification,
   signInWithEmailAndPassword,
   signOut,
   User,
@@ -10,7 +12,7 @@ import { getAuth } from 'firebase/auth';
 import { firstValueFrom, Observable, take } from 'rxjs';
 import { getFirebaseApp } from '../firebase/firebase-app';
 
-export const ADMIN_EMAIL = 'ronfelara@gmail.com';
+export const ADMIN_EMAIL = 'rodrigonflara@gmail.com';
 
 @Injectable({ providedIn: 'root' })
 export class AdminAuthService {
@@ -30,8 +32,18 @@ export class AdminAuthService {
     return firstValueFrom(this.observeUser().pipe(take(1)));
   }
 
-  async signIn(email: string, password: string): Promise<void> {
-    await signInWithEmailAndPassword(this.auth, email.trim(), password);
+  async signIn(email: string, password: string): Promise<User> {
+    const credential = await signInWithEmailAndPassword(this.auth, email.trim(), password);
+    return credential.user;
+  }
+
+  async sendVerificationEmail(user: User): Promise<void> {
+    await sendEmailVerification(user);
+  }
+
+  async refreshUser(user: User): Promise<User> {
+    await reload(user);
+    return user;
   }
 
   async signOut(): Promise<void> {
