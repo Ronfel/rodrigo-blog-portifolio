@@ -14,8 +14,8 @@ export class Contact {
   protected sendMessage(): void {
     const subject = encodeURIComponent(`Contato pelo portfólio: ${this.name}`);
     const body = encodeURIComponent(
-      `Nome: ${this.name}\nE-mail: ${this.email}\n\n${this.message}`,
+      `${this.message}`,
     );
-    window.location.href = `mailto:seuemail@exemplo.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:rodrigonflara@gmail.com?subject=${subject}&body=${body}`;
   }
 }
