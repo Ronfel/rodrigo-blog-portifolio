@@ -18,6 +18,15 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+html.dark-theme {
+  color-scheme: dark;
+  --ink: #f3f4f6;
+  --muted: #9ca3af;
+  --paper: #111827;
+  --line: #374151;
+  --mint: #1f2937;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -98,6 +107,36 @@ textarea {
 .main-nav a.active,
 .site-footer a:hover {
   color: var(--green);
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  margin-left: 20px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 18px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.theme-toggle:hover {
+  border-color: var(--green);
+  color: var(--green);
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+}
+
+html.dark-theme .theme-toggle {
+  background: var(--line);
 }
 
 .main-nav .nav-contact {
