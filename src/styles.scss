@@ -910,6 +910,40 @@ html.dark-theme .theme-toggle {
   margin: 0 0 10px;
 }
 
+/* Manter cores claras nas listagens de projetos e posts no dark theme */
+html.dark-theme .project-card,
+html.dark-theme .post-card {
+  background: var(--white);
+  border-color: var(--line);
+  color: var(--ink);
+}
+
+html.dark-theme .project-card h3,
+html.dark-theme .post-card h2 {
+  color: var(--ink);
+}
+
+html.dark-theme .project-card p,
+html.dark-theme .post-card p {
+  color: var(--muted);
+}
+
+html.dark-theme .project-number,
+html.dark-theme .post-meta {
+  color: var(--green);
+}
+
+html.dark-theme .tag {
+  background: var(--mint);
+  color: var(--green-dark);
+}
+
+html.dark-theme .content-message {
+  background: var(--white);
+  border-color: var(--line);
+  color: var(--muted);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
