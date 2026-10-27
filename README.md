@@ -69,7 +69,8 @@ Cada documento deve conter:
   "title": "Título do post",
   "description": "Resumo do artigo.",
   "date": "2026-10-08",
-  "readingTime": "5 min de leitura"
+  "readingTime": "5 min de leitura",
+  "content": "<p>Texto completo do post, com <strong>formatação</strong> se desejado.</p>"
 }
 ```
 

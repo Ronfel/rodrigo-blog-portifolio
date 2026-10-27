@@ -17,6 +17,11 @@
       <textarea id="post-description" name="description" [(ngModel)]="description" maxlength="500" required></textarea>
     </div>
     <div class="form-field">
+      <label for="post-content">Texto completo do post</label>
+      <div id="post-content" name="content" contenteditable="true" class="rich-text" [innerHTML]="postContent" (input)="postContent = $any($event.target).innerHTML" required></div>
+      <p class="admin-description">Aceita texto formatado (negrito, itálico, links, listas). Copie e cole de outro lugar.</p>
+    </div>
+    <div class="form-field">
       <label for="post-date">Data de publicação</label>
       <input id="post-date" name="date" type="date" [(ngModel)]="date" required />
     </div>

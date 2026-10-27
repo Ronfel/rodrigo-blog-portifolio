@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { RouterLink } from '@angular/router';
 import { BlogPost, ContentState, FirestoreContentService } from '../../firebase/firestore-content.service';
 
 const INITIAL_POSTS_STATE: ContentState<BlogPost> = {
@@ -9,6 +10,7 @@ const INITIAL_POSTS_STATE: ContentState<BlogPost> = {
 };
 
 @Component({
+  imports: [RouterLink],
   selector: 'app-blog',
   templateUrl: './blog.html',
 })

@@ -1,0 +1,29 @@
+<section class="page-heading">
+  <span class="eyebrow">Notas de percurso</span>
+  <h1>Blog<span style="color: var(--green)">.</span></h1>
+</section>
+
+<section class="post-detail-page">
+  @if (postsState().loading) {
+    <p class="content-message">Carregando post...</p>
+  } @else if (postsState().error) {
+    <p class="content-message content-error" role="alert">{{
+      postsState().error
+    }}</p>
+  } @else {
+    @if (post(); as p) {
+      <article class="post-detail">
+        <h1>{{ p.title }}</h1>
+        <div class="post-meta">
+          <span>{{ p.category }}</span>
+          <span>{{ p.date }}</span>
+        </div>
+        <div class="post-content" [innerHTML]="safeHtml(p.content)"></div>
+        <a class="button" routerLink="/blog">← Voltar ao blog</a>
+      </article>
+    } @else {
+      <p class="content-message">Post não encontrado.</p>
+      <a class="button" routerLink="/blog">Voltar ao blog</a>
+    }
+  }
+</section>

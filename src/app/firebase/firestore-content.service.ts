@@ -20,6 +20,7 @@ export interface BlogPost {
   description: string;
   date: string;
   readingTime: string;
+  content: string;
 }
 
 export interface ContentState<T> {
@@ -151,6 +152,7 @@ export class FirestoreContentService {
       description: this.readString(id, data, 'description'),
       date: this.readString(id, data, 'date'),
       readingTime: this.readString(id, data, 'readingTime'),
+      content: this.readOptionalString(id, data, 'content'),
     };
   }
 
@@ -158,6 +160,14 @@ export class FirestoreContentService {
     const value: unknown = data[field];
     if (typeof value !== 'string' || !value.trim()) {
       throw new Error(`Document "${id}" must contain a non-empty "${field}" string.`);
+    }
+    return value;
+  }
+
+  private readOptionalString(id: string, data: DocumentData, field: string): string {
+    const value: unknown = data[field];
+    if (typeof value !== 'string' || !value.trim()) {
+      return '';
     }
     return value;
   }

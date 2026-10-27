@@ -18,6 +18,14 @@ export const routes: Routes = [
     title: 'Blog | Rodrigo',
   },
   {
+    path: 'blog/post/:id',
+    loadComponent: () =>
+      import('./pages/blog/blog-post-detail/blog-post-detail').then(
+        (module) => module.BlogPostDetail,
+      ),
+    title: 'Post | Rodrigo',
+  },
+  {
     path: 'contato',
     loadComponent: () => import('./pages/contact/contact').then((module) => module.Contact),
     title: 'Contato | Rodrigo',

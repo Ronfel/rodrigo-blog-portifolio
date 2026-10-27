@@ -13,6 +13,7 @@ export class AdminPostForm {
   protected category = '';
   protected title = '';
   protected description = '';
+  protected postContent = '';
   protected date = '';
   protected readingTime = '5 min de leitura';
   protected order = 1;
@@ -36,6 +37,7 @@ export class AdminPostForm {
         category: this.category.trim(),
         title: this.title.trim(),
         description: this.description.trim(),
+        content: this.postContent.trim(),
         date: this.date,
         readingTime: this.readingTime.trim(),
         order: Number(this.order),
@@ -46,6 +48,7 @@ export class AdminPostForm {
       this.category = '';
       this.title = '';
       this.description = '';
+      this.postContent = '';
       this.date = '';
       this.readingTime = '5 min de leitura';
       this.order += 1;

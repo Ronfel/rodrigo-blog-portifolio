@@ -54,6 +54,7 @@ export interface NewPost {
   description: string;
   date: string;
   readingTime: string;
+  content: string;
 }
 
 @Injectable({ providedIn: 'root' })
