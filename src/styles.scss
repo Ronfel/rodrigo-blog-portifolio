@@ -902,6 +902,34 @@ html.dark-theme .post-detail h1 {
   margin: 0 0 16px;
 }
 
+/* Post detail sempre tem background branco, forçar cores escuras no conteúdo */
+html.dark-theme .post-detail .post-content {
+  color: #202923 !important;
+}
+
+html.dark-theme .post-detail .post-content strong,
+html.dark-theme .post-detail .post-content b {
+  color: #202923 !important;
+}
+
+html.dark-theme .post-detail .post-content em,
+html.dark-theme .post-detail .post-content i {
+  color: #202923 !important;
+}
+
+html.dark-theme .post-detail .post-content a {
+  color: #155a8c !important;
+}
+
+html.dark-theme .post-detail .post-content ul,
+html.dark-theme .post-detail .post-content ol {
+  color: #202923 !important;
+}
+
+html.dark-theme .post-detail .post-content p {
+  color: #202923 !important;
+}
+
 .rich-text {
   display: block;
   width: 100%;
