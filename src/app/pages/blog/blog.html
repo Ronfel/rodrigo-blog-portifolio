@@ -7,15 +7,34 @@
   </p>
 </section>
 
+<section class="blog-filters" aria-label="Filtrar por categoria">
+  <button
+    class="filter-btn"
+    [class.active]="selectedCategory() === null"
+    (click)="setCategory(null)"
+  >
+    Todas as categorias
+  </button>
+  @for (cat of categories(); track cat) {
+    <button
+      class="filter-btn"
+      [class.active]="selectedCategory() === cat"
+      (click)="setCategory(cat)"
+    >
+      {{ cat }}
+    </button>
+  }
+</section>
+
 <section class="blog-list" aria-label="Lista de posts">
   @if (postsState().loading) {
     <p class="content-message">Carregando posts...</p>
   } @else if (postsState().error) {
     <p class="content-message content-error" role="alert">{{ postsState().error }}</p>
-  } @else if (postsState().items.length === 0) {
-    <p class="content-message">Os posts serão publicados em breve.</p>
+  } @else if (filteredPosts().length === 0) {
+    <p class="content-message">Não há posts nesta categoria.</p>
   } @else {
-    @for (post of postsState().items; track post.id) {
+    @for (post of filteredPosts(); track post.id) {
       <a class="post-card-link" [routerLink]="['/blog/post', post.id]">
         <article class="post-card">
           <span class="post-meta">{{ post.category }}</span>

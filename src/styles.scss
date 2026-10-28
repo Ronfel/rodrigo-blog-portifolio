@@ -996,3 +996,56 @@ html.dark-theme .content-message {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Blog category filters */
+.blog-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 40px 0 24px;
+}
+
+.filter-btn {
+  padding: 8px 16px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 160ms ease;
+}
+
+.filter-btn:hover {
+  border-color: var(--green);
+  color: var(--green);
+}
+
+.filter-btn.active {
+  background: var(--green);
+  color: var(--white);
+  border-color: var(--green);
+}
+
+.filter-btn:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+}
+
+html.dark-theme .filter-btn {
+  background: #fff !important;
+  color: #202923 !important;
+  border-color: #e4e7df !important;
+}
+
+html.dark-theme .filter-btn:hover {
+  border-color: #1d6fa5 !important;
+  color: #1d6fa5 !important;
+}
+
+html.dark-theme .filter-btn.active {
+  background: #1d6fa5 !important;
+  color: #fff !important;
+  border-color: #1d6fa5 !important;
+}
